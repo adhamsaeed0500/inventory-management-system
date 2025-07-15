@@ -4,5 +4,6 @@ const { authorize } = require('../middlewares/authorization');
 const router = express.Router();
 
  router.post('/signup',authorize(['admin']), userController.signup);
+ router.post('/signin', userController.signin );
 
  module.exports = router;

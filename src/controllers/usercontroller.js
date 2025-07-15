@@ -1,7 +1,8 @@
 const express = require('express');
-const { signupSchema} = require('../middlewares/validator');
+const { signupSchema , signinSchema} = require('../middlewares/validator');
+const {jwt} = require('jsonwebtoken');
 const User = require('../models/usersmodel');
-const { doHash} = require('../utils/hashing');
+const { doHash , doHashValidation} = require('../utils/hashing');
 const app = express();
 
 
@@ -41,3 +42,54 @@ exports.signup = async (req, res)=>{
     }
     
 }
+
+exports.signin = async (req, res) => {
+	const { userName, password } = req.body;
+	try {
+		const { error, value } = signinSchema.validate({ userName, password });
+		if (error) {
+			return res
+				.status(401)
+				.json({ success: false, message: error.details[0].message });
+		}
+
+		const existingUser = await User.findOne({ userName }).select('+password');
+		if (!existingUser) {
+			return res
+				.status(401)
+				.json({ success: false, message: 'User does not exists!' });
+		}
+		const result = await doHashValidation(password, existingUser.password);
+		if (!result) {
+			return res
+				.status(401)
+				.json({ success: false, message: 'Invalid credentials!' });
+		}
+		const token = jwt.sign(
+			{
+				userId: existingUser._id,
+				email: existingUser.email,
+				verified: existingUser.verified,
+			},
+            'Adham@123'
+            ,
+			{
+				expiresIn: '8h',
+			}
+		);
+
+		res
+			.cookie('Authorization', 'Bearer ' + token, {
+				expires: new Date(Date.now() + 8 * 3600000),
+			})
+			.json({
+				success: true,
+				token,
+				message: 'logged in successfully',
+			});
+	} catch (error) {
+				return res
+				.status(400)
+				.json({ success: false, message: 'there is an error ' , error:error });
+	}
+};

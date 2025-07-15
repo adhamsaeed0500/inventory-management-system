@@ -8,3 +8,12 @@ exports.signupSchema = Joi.object({
 	password: Joi.string()
 		.required()
 });
+
+exports.signinSchema = Joi.object({
+	userName: Joi.string()
+		.min(6)
+		.max(60)
+		.required(),
+	password: Joi.string()
+		.required()
+});
