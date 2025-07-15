@@ -3,6 +3,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+const userRouter = require('./routers/userRouter');
+
 const app = express();
 app.use(cors());
 app.use(cookieParser());
@@ -17,5 +19,7 @@ mongoose
 	.catch((err) => {
 		console.log(err);
 	});
+
+app.use('/user',userRouter); 
 
 module.exports = app;

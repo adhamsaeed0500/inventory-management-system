@@ -1,14 +1,13 @@
-const { string } = require('joi');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
 	{
-		email: {
+		userName: {
 			type: String,
-			required: [true, 'Email is required!'],
+			required: [true, 'Name is required!'],
 			trim: true,
-			unique: [true, 'Email must be unique!'],
-			minLength: [5, 'Email must have 5 characters!'],
+			unique: [true, 'Name must be unique!'],
+			minLength: [3, 'Name must have 3 characters!'],
 			lowercase: true,
 		},
 		password: {
