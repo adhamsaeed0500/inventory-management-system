@@ -93,3 +93,12 @@ exports.signin = async (req, res) => {
 				.json({ success: false, message: 'there is an error ' , error:error });
 	}
 };
+
+exports.signout = async (req, res) => {
+	res
+		.clearCookie('Authorization')
+		.status(200)
+		.json({ success: true, message: 'logged out successfully' });
+};
+
+
