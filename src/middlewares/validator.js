@@ -17,3 +17,22 @@ exports.signinSchema = Joi.object({
 	password: Joi.string()
 		.required()
 });
+
+exports.productSchema = Joi.object({
+	name: Joi.string()
+		.min(3)
+		.max(100)
+		.required(),
+	category: Joi.string()
+		.required(),
+	price:Joi.number()
+		.required(),
+	quantity:Joi.number()
+		.required(),
+	supplier:{
+		name:Joi.string()
+		.required(),
+		phone:Joi.string()
+		.required()
+	}	
+});

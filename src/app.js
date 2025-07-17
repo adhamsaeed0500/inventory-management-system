@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const userRouter = require('./routers/userRouter');
-const userRouter = require('./routers/productRouter');
+const productRouter = require('./routers/productRouter');
 
 const app = express();
 app.use(cors());
