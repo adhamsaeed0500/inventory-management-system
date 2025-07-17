@@ -70,3 +70,29 @@ exports.getAllProducts = async(req , res) => {
 
     }
 };
+
+
+exports.getProductById = async(req , res) => {
+    const {id} = req.params;
+    try {
+        const products = await productmodel
+            .findOne({_id:id})
+            .select('name category price quantity')
+            .populate('supplier', 'name phone')
+            .lean(); 
+
+        return res.status(200).json({
+            success: true,
+            result: products
+        });
+
+        
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: 'An error occured during trying to retrieve product',
+            error: error.message
+        });
+
+    }
+};
