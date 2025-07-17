@@ -122,3 +122,26 @@ exports.deleteProductById = async(req , res) => {
     }
 };
 
+exports.updateProductById = async(req , res) => {
+    const {id} = req.params;
+    const {name , category , price , quantity } = req.body;
+    try {
+        const products = await productmodel
+            .updateOne({_id:id},{name:name , price:price , quantity:quantity });
+
+        return res.status(200).json({
+            success: true,
+            message:'product updated successfully',
+            result: products
+        });
+
+        
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: 'An error occured during trying to update product',
+            error: error.message
+        });
+
+    }
+};
