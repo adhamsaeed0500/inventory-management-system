@@ -145,3 +145,28 @@ exports.updateProductById = async(req , res) => {
 
     }
 };
+
+exports.getLowProduct = async(req , res) => {
+    try {
+        const products = await productmodel
+            //.find({quantity:{$lte:5 , $eq:5}})
+            .find({$expr:{$or:[{$eq:["$quantity","$minQuantityAlert"]} , {$lt:["$quantity","$minQuantityAlert"]}]}})
+            .select('name category price quantity minQuantityAlert')
+            .lean(); 
+
+        return res.status(200).json({
+            success: true,
+            count: products.length,
+            result: products
+        });
+
+        
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: 'An error occured during trying to retrieve product',
+            error: error.message
+        });
+
+    }
+};
