@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const userRouter = require('./routers/userRouter');
+const userRouter = require('./routers/productRouter');
 
 const app = express();
 app.use(cors());
@@ -21,5 +22,6 @@ mongoose
 	});
 
 app.use('/user',userRouter); 
+app.use('/products',productRouter); 
 
 module.exports = app;
