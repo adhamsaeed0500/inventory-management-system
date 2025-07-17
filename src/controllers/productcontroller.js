@@ -96,3 +96,29 @@ exports.getProductById = async(req , res) => {
 
     }
 };
+
+
+exports.deleteProductById = async(req , res) => {
+    const {id} = req.params;
+    try {
+        const products = await productmodel
+            .deleteOne({_id:id});
+
+
+        return res.status(200).json({
+            success: true,
+            message:'product deleted successfully',
+            result: products
+        });
+
+        
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: 'An error occured during trying to delete product',
+            error: error.message
+        });
+
+    }
+};
+
