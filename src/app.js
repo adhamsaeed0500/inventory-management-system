@@ -3,8 +3,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('./cron/lowStockNotifier');
+
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
+const notificationRouter = require('./routers/notificationRouter');
 
 const app = express();
 app.use(cors());
@@ -23,5 +25,6 @@ mongoose
 
 app.use('/user',userRouter); 
 app.use('/products',productRouter); 
+app.use('/notification',notificationRouter); 
 
 module.exports = app;
