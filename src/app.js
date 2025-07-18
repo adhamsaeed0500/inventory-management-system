@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-
+require('./cron/lowStockNotifier');
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
 
