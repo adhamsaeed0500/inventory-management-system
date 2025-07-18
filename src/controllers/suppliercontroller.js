@@ -29,5 +29,24 @@ exports.getSupplierById = async (req, res) => {
   }
 };
 
+exports.updateSupplier = async (req, res) => {
+  try {
+    const updated = await Supplier.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ success: false, message: 'supplier not found' });
+    res.status(200).json({ success: true, result: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during updating supplier', error: error.message });
+  }
+};
+
+exports.deleteSupplier = async (req, res) => {
+  try {
+    const deleted = await Supplier.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ success: false, message: 'supplier not found' });
+    res.status(200).json({ success: true, message: 'supplier deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during deleting supplier', error: error.message });
+  }
+};
 
 
