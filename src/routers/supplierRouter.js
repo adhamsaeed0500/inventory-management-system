@@ -5,6 +5,9 @@ const router = express.Router();
 
  router.post('/create', suppliercontroller.createSupplier);
  router.get('/', suppliercontroller.getAllSuppliers);
+ router.get('/:id', suppliercontroller.getSupplierById);
+
+ 
 
 
 
