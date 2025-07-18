@@ -32,8 +32,8 @@ exports.createPurchase = async (req, res) => {
 
 exports.getAllPurchases = async (req, res) => {
   try {
-    const suppliers = await Purchase.find().lean();
-    res.status(200).json({ success: true, result: suppliers });
+    const Purchase = await Purchase.find().lean();
+    res.status(200).json({ success: true, result: Purchase });
   } catch (error) {
     res.status(500).json({ success: false, message: 'An error occured during retrieving Purchases', error: error.message });
   }
@@ -42,9 +42,9 @@ exports.getAllPurchases = async (req, res) => {
 
 exports.getPurchaseById = async (req, res) => {
   try {
-    const supplier = await Purchase.findById(req.params.id).lean();
-    if (!supplier) return res.status(404).json({ success: false, message: 'Purchase not found' });
-    res.status(200).json({ success: true, result: supplier });
+    const Purchase = await Purchase.findById(req.params.id).lean();
+    if (!Purchase) return res.status(404).json({ success: false, message: 'Purchase not found' });
+    res.status(200).json({ success: true, result: Purchase });
   } catch (error) {
     res.status(500).json({ success: false, message: 'An error occured during retrieving Purchase', error: error.message });
   }
