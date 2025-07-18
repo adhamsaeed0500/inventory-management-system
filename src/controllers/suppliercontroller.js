@@ -10,3 +10,12 @@ exports.createSupplier = async (req, res) => {
   }
 };
 
+exports.getAllSuppliers = async (req, res) => {
+  try {
+    const suppliers = await Supplier.find().select('name phone address').lean();
+    res.status(200).json({ success: true, result: suppliers });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during retrieving suppliers', error: error.message });
+  }
+};
+
