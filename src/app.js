@@ -9,6 +9,7 @@ const productRouter = require('./routers/productRouter');
 const notificationRouter = require('./routers/notificationRouter');
 const supplierRouter = require('./routers/supplierRouter');
 const purchaseRouter = require('./routers/purchaseRouter');
+const saleRouter = require('./routers/saleRouter');
 
 const app = express();
 app.use(cors());
@@ -30,5 +31,6 @@ app.use('/products',productRouter);
 app.use('/notification',notificationRouter);
 app.use('/supplier',supplierRouter); 
 app.use('/purchase',purchaseRouter);
+app.use('/sale',saleRouter);
 
 module.exports = app;

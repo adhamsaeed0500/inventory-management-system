@@ -12,4 +12,4 @@ const saleSchema = new mongoose.Schema({
   invoiceNumber: String
 });
 
-module.exports = mongoose.model('Sale', purchaseSchema);
+module.exports = mongoose.model('Sale', saleSchema);
