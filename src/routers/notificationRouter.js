@@ -5,8 +5,8 @@ const router = express.Router();
 
  router.get('/', notificationcontroller.getAllNotifications);
  router.get('/unread', notificationcontroller.getAllUnreadNotifications);
-//  router.delete('/:id',notificationcontroller.deleteNotification);
-//  router.put('/:id', notificationcontroller.updateStatus);
+ router.delete('/:id',notificationcontroller.deleteNotification);
+ router.put('/:id', notificationcontroller.updateStatus);
 
 
  module.exports = router;
