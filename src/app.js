@@ -8,6 +8,7 @@ const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
 const notificationRouter = require('./routers/notificationRouter');
 const supplierRouter = require('./routers/supplierRouter');
+const purchaseRouter = require('./routers/purchaseRouter');
 
 const app = express();
 app.use(cors());
@@ -28,5 +29,6 @@ app.use('/user',userRouter);
 app.use('/products',productRouter); 
 app.use('/notification',notificationRouter);
 app.use('/supplier',supplierRouter); 
+app.use('/purchase',purchaseRouter);
 
 module.exports = app;
