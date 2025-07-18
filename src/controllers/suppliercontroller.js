@@ -1,4 +1,6 @@
 const Supplier = require('../models/suppliermodel');
+const Product = require('../models/productmodel');
+
 
 
 exports.createSupplier = async (req, res) => {
@@ -49,4 +51,13 @@ exports.deleteSupplier = async (req, res) => {
   }
 };
 
+exports.getSupplierProducts = async (req ,res) =>{
+  try {
+    const supplierProducts = await Product.find({supplier:req.params.id}).select('name price quantity').lean();
+    if(!supplierProducts) return res.status(404).json({success:false , message:'supplierProducts not found'});
+    res.status(200).json({success:true , message:'get supplierProducts successfully' , result:supplierProducts});
 
+  } catch (error) { 
+  res.status(500).json({ success: false, message: 'An error occured during retrieving supplier', error: error.message });
+  }
+};

@@ -8,6 +8,8 @@ const router = express.Router();
  router.get('/:id', suppliercontroller.getSupplierById);
  router.delete('/:id', suppliercontroller.deleteSupplier);
  router.put('/:id', suppliercontroller.updateSupplier);
+ router.get('/:id/products', suppliercontroller.getSupplierProducts);
+
 
 
 
