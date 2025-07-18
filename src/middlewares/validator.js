@@ -36,3 +36,20 @@ exports.productSchema = Joi.object({
 		.required()
 	}	
 });
+
+
+exports.purchaseSchema = Joi.object({
+	supplier: Joi.string()
+		.required(),
+	products: Joi.array().items(
+       Joi.object({
+       product: Joi.string().required(),
+       quantity: Joi.number().required(),
+       unitPrice: Joi.number().required()
+       })
+       ).required(),
+   totalPrice:Joi.number()
+		.required(),
+	invoiceNumber:Joi.string()
+	.required()
+});
