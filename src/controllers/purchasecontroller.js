@@ -29,3 +29,45 @@ exports.createPurchase = async (req, res) => {
     return res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 };
+
+exports.getAllPurchases = async (req, res) => {
+  try {
+    const suppliers = await Purchase.find().lean();
+    res.status(200).json({ success: true, result: suppliers });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during retrieving Purchases', error: error.message });
+  }
+};
+
+
+exports.getPurchaseById = async (req, res) => {
+  try {
+    const supplier = await Purchase.findById(req.params.id).lean();
+    if (!supplier) return res.status(404).json({ success: false, message: 'Purchase not found' });
+    res.status(200).json({ success: true, result: supplier });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during retrieving Purchase', error: error.message });
+  }
+};
+
+exports.updatePurchase = async (req, res) => {
+  try {
+    const updated = await Purchase.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ success: false, message: 'Purchase not found' });
+    res.status(200).json({ success: true, result: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during updating Purchase', error: error.message });
+  }
+};
+
+exports.deletePurchase = async (req, res) => {
+  try {
+    const deleted = await Purchase.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ success: false, message: 'Purchase not found' });
+    res.status(200).json({ success: true, message: 'Purchase deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'An error occured during deleting Purchase', error: error.message });
+  }
+};
+
+
