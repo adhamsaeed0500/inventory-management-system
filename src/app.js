@@ -7,6 +7,7 @@ require('./cron/lowStockNotifier');
 const userRouter = require('./routers/userRouter');
 const productRouter = require('./routers/productRouter');
 const notificationRouter = require('./routers/notificationRouter');
+const supplierRouter = require('./routers/supplierRouter');
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,7 @@ mongoose
 
 app.use('/user',userRouter); 
 app.use('/products',productRouter); 
-app.use('/notification',notificationRouter); 
+app.use('/notification',notificationRouter);
+app.use('/supplier',supplierRouter); 
 
 module.exports = app;
